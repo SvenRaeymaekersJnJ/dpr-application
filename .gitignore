@@ -9,6 +9,8 @@ build/
 test-results/
 playwright-report/
 .venv
+.npmrc
+__pychache__
 
 # Auto-generated types (endpoint-specific, varies per developer)
 shared/appkit-types/serving.d.ts
