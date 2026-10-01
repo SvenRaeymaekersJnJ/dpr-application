@@ -160,3 +160,13 @@ tr.row-variance .cell { background: #fafbfd; font-weight: 600; }
 .reset-btn:disabled { opacity: 0.45; cursor: default; }
 .reset-btn:not(:disabled):hover { border-color: var(--accent); color: var(--accent); }
 .reset-btn + .reset-btn { margin-left: 0; }
+
+/* override row: neutral by default */
+.row-override td { background: #fff; color: #33404f; }
+
+/* only overridden cells get the accent */
+.row-override td.overridden {
+  background: color-mix(in srgb, var(--accent) 12%, #fff);
+  color: var(--accent);
+  font-weight: 600;
+}
