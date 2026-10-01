@@ -1,27 +1,25 @@
 bundle:
-  name: appkit-lakebase
+  name: dpr-application
+
+sync:
+  include:
+    - backend/static/**
+    - backend/wheels/**
 
 variables:
   postgres_branch:
-    description: Full Lakebase Postgres branch resource name. Obtain by running `databricks postgres list-branches {project-name}`, select the desired item from the output array and use its .name value. Requires the project resource name.
+    description: Lakebase branch resource name
   postgres_database:
-    description: Full Lakebase Postgres database resource name. Obtain by running `databricks postgres list-databases {branch-name}`, select the desired item from the output array and use its .name value. Requires the branch resource name.
+    description: Lakebase database resource name
 
 resources:
   apps:
     app:
-      name: "appkit-lakebase"
-      description: "Node.js app with Lakebase Autoscaling (Postgres) CRUD operations"
-      source_code_path: ./
-
-      # Start the app automatically on deploy.
+      name: "dpr-application"
+      description: "J&J Demand Planning Review PoC"
+      source_code_path: ./backend
       lifecycle:
         started: true
-      # Uncomment to enable on behalf of user API scopes. Available scopes: sql, dashboards.genie, files.files, serving.serving-endpoints
-      # user_api_scopes:
-      #   - sql
-
-      # The resources which this app has access to.
       resources:
         - name: postgres
           postgres:
@@ -33,8 +31,7 @@ targets:
   default:
     default: true
     workspace:
-      host: https://your-workspace.cloud.databricks.com
-
+      host: https://adb-6311558837731959.19.azuredatabricks.net
     variables:
-      postgres_branch: placeholder
-      postgres_database: placeholder
+      postgres_branch: projects/demandplanningreviewtool/branches/production
+      postgres_database: projects/demandplanningreviewtool/branches/production/databases/databricks-postgres
