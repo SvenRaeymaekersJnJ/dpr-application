@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
 
+from contextlib import asynccontextmanager
+from db import pool
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -11,7 +14,14 @@ from routers.ibp import router as ibp_router
 from routers.financial import router as financial_router
 from routers.overrides import router as overrides_router
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    pool.open(wait=True) # connect once at startup
+    yield
+    pool.close()
+
+app = FastAPI(lifespan=lifespan)
 
 # API routes
 app.include_router(brands_router,prefix="/api")

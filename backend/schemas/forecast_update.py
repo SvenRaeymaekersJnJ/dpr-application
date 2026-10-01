@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from typing import Literal
 class ForecastRow(BaseModel):
     id: str
     label: str
@@ -14,4 +14,5 @@ class ForecastData(BaseModel):
 class OverrideSave(BaseModel):
     brand: str
     sku: str | None = None
+    measure: Literal["VOLUME", "VALUE"] = "VOLUME" # <-- add
     overrides: dict[str, float]
