@@ -5,6 +5,9 @@ sync:
   include:
     - backend/static/**
     - backend/wheels/**
+  exclude:
+    - backend/tempbackend.zip
+    - "**/__pycache__/**"
 
 variables:
   postgres_branch:

@@ -4,6 +4,7 @@ import { useForecast } from "../hooks/useForecast";
 import { fmtNum, monthLabel, fmtPrice } from "../utils/format";
 import type { Measure, Sku } from "../types/planner";
 import "./ForecastGrid.css";
+import ForecastChart, { LABEL_W, COL_W } from "./ForecastChart";
 
 interface Props {
   brand: string;
@@ -24,7 +25,20 @@ export default function ForecastGrid({ brand, sku, measure }: Props) {
   return (
     <div className="grid-wrap">
       <div className="grid-scroll">
-        <table className="fgrid">
+        <ForecastChart f={f} />
+        <table
+          className="fgrid"
+          style={{
+            tableLayout: "fixed",
+            width: LABEL_W + periods.length * COL_W,
+          }}
+        >
+          <colgroup>
+            <col style={{ width: LABEL_W }} />
+            {periods.map((p) => (
+              <col key={p} style={{ width: COL_W }} />
+            ))}
+          </colgroup>
           <thead>
             <tr className="year-row">
               <th className="corner" rowSpan={2}>
