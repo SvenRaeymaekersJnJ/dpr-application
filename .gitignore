@@ -18,3 +18,8 @@ shared/appkit-types/serving.d.ts
 
 __pycache__/
 *.zip
+
+.databricks/
+.venv/
+node_modules/
+.env

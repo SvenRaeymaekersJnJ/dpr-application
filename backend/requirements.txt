@@ -1,4 +1,4 @@
 --no-index
 --find-links ./wheels
 psycopg[binary]
-psycopg_pool-3.3.3-py3-none-any.whl
+psycopg_pool
